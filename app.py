@@ -1,6 +1,6 @@
 from flask import Flask
 
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_session import Session
 from tempfile import mkdtemp
 import sqlite3
@@ -57,6 +57,23 @@ def login():
             curr_user = username
             return render_template('index.html', curr_user=curr_user)
 
+@app.route("/find-topics", methods=["GET", "POST"])
+def find_topics():
+    if request.method == "GET":
+        return render_template('find-topics.html', curr_user=curr_user)
+    else:
+        topic = request.form.get("topic")
+        topic = topic.lower()
+        similar_topics = cur.execute("""SELECT name FROM topics WHERE name LIKE ?""", (topic,))
+        similar_topics = cur.fetchall()
+        print(similar_topics)
+        # Better way than just going thru each name and seeing any terms are in there??
+        # TODO: add limit to # of words (spaces)
+
+
+        print(topic)
+        return render_template('find-topics.html', curr_user=curr_user, similar_topics=similar_topics)
+
 # Create Account
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -64,7 +81,7 @@ def register():
         if curr_user == "":
             return render_template('register.html', curr_user=curr_user)
         else:
-            return render_template('find-topics.html', curr_user=curr_user)
+            return redirect(url_for('find_topics'))
     else:
         # Gets information inputted
         username = request.form.get("username")
@@ -91,5 +108,4 @@ def register():
         # Insert account information into database
         cur.execute("""INSERT INTO accounts VALUES (?, ?, ?)""", (username, password, email))
         con.commit()
-
         return render_template('index.html', curr_user=curr_user)

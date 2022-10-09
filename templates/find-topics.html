@@ -1,9 +1,41 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Accountability
+    Find Your Topic
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        var firstBtns = document.getElementsByClassName('first-btn');
+        console.log(firstBtns);
+
+        function firstBtnPush(id) {
+            Array.from(firstBtns).forEach(btn => {
+                btn.style.display = "none";
+            })
+            if(id == "academic") {
+                
+            }
+            else {
+
+            }
+        }
+    </script>
 {% endblock %}
 
 {% block main %}
-    <div class="title">It's so easy, we didn't even need to design this page.</div>
+    <div class="title">What are you pursuing?</div>
+    <div style="text-align:center;">This could be a class, a hobby, a project, or anything else you can conceive of.</div>
+    <form action="/find-topics", method="post" style="text-align:center;">
+        <div class="input-group mb-3" style="padding: 1em 30% 0em 30%">
+            <input style="border:2px solid black; box-shadow:none !important;" type="text" name="topic" class="form-control" placeholder="Your Topic" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button style="border:2px solid black;" class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+        </div>
+    </form>
+    <!-- Results here -->
+    {{ similar_topics }}
+
+    <div class="title" style='padding-top:1em;'>...or how about some inspiration?</div>
+
+    <!-- Random Topics down here! -->
 {% endblock %}
