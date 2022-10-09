@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <div class="title">Register</div>
+
+    <div class="error"> {{ error }} </div>
+    
+    <form style="padding-left: 30%; padding-right: 30%; text-align: center;" action="/register" method="post">
+    <div class="mb-3">
+        <input type="username" name="username" class="form-control" placeholder="Username">
+    </div>
+    <div class="mb-3">
+        <input type="email" name="email" class="form-control"placeholder="Email">
+    </div>
+    <div class="mb-3">
+        <input type="password" name="password" class="form-control"placeholder="Password">
+    </div>
+
+    <button style="width:90%; background:rgb(217, 217, 217);" class="btn login-btn" type="submit">Create Account</button>
+    </form>
+
+    <div style="text-align:center; padding:1em;">
+        <a href="/login">Have an account? Log in here!</a>
+      </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Accountability
+{% endblock %}
+
+{% block main %}
+<!-- TODO: Animate to fade in for style points-->
+<div class="title" style="line-height:0%; padding-top:5%">Welcome to</div>
+<div class="big-title">Ac<span style="color:rgb(191, 23, 23); text-decoration:underline;">count</span>ability</div>
+<div class="subtitle" style="line-height:100%">Productivity. Now.</div>
+
+
+<div style="padding-top:5%" id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+        <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+        <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <!-- Clock gif from videvo.net -->
+        <div class="carousel-item active" data-bs-interval="6000" style="background-image:url('static/assets/clock.mp4'); background-repeat:repeat;">
+            <div class="container">
+                <h1>Accountability.</h1>
+                <p>It's time to <span style="font-weight:bold">do</span> something.</p>
+            </div>
+        </div>
+        <!-- Clock gif from mixkit.co -->
+        <div class="carousel-item" data-bs-interval="6000" style="background-image:url('static/assets/typing.gif'); background-repeat:repeat;">
+            <div class="container">
+                <h1>Let's do it <i>differently</i>.</h1>
+                <p>An imaginative solution implemented into daily reality.</p>
+            </div>
+        </div>
+        <!-- Clock gif from mixkit.co -->
+        <div class="carousel-item" data-bs-interval="6000" style="background-image:url('static/assets/dog-in-snow.mp4'); background-repeat:repeat;">
+            <div class="container">
+                <h1 style="color:black">A proven method.</h1>
+                <p style="color:black;">See 'How It Works' for authentic testimonials.</p>
+            </div>
+        </div>
+    </div>
+    <a href="#myCarousel" class = "carousel-control-prev" role="button" data-bs-slide="prev">
+        <span class="sr-only"></span>
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </a>
+    <a href="#myCarousel" class = "carousel-control-next" role="button" data-bs-slide="next">
+        <span class="sr-only"></span>
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </a>
+</div>
+
+<div style="padding-top:2%; text-align:center;">
+    <div style="margin-left:5%; margin-right:5%; padding-bottom:2%">
+        Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah 
+    </div>
+    <form action="/register">
+        <button type="submit" class="btn btn-outline-dark" style="font-size:1.75em;">Let's Get Started!</button>
+    </form>
+</div>
+
+    
+{% endblock %}
+

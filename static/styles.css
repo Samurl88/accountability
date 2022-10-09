@@ -1,0 +1,62 @@
+.title {
+    font-size: 2.5em;
+    color: black;
+    font-weight: 600;
+    text-align: center;
+}
+
+.big-title {
+    font-size: 5.5em;
+    color: black;
+    font-weight: 600;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: black;
+    font-weight: 600;
+    text-align: center;
+}
+
+
+.login-btn:hover {
+    background-color:rgb(181, 181, 181);
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
+
+.center {
+    text-align:center;
+    background-color: rgb(240, 232, 232);
+}
+
+.button {
+    padding:1em 2em;
+    border-radius:0.5em;
+    color:black;
+    font-weight:bold;
+    background:#B8BCBA;
+    border-bottom:0.55em solid #7A7F7D;
+    transition:0.3s;
+}
+
+.carousel-item {
+    height: 32rem;
+    background:#777;
+    color:white;
+    position:relative;
+    background-position:center;
+    background-size:cover;
+}
+
+.container {
+    position: absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding-bottom:50px;
+}
