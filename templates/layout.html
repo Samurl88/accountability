@@ -16,7 +16,7 @@
     </head>
     
     <body>
-        <nav class="navbar navbar-expand-lg bg-light">
+        <nav class="navbar navbar-expand-lg bg-light" style="width:100%; ">
             <div class="container-fluid">
               <a class="navbar-brand" href="/">Accountability</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,23 +24,21 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if curr_user != "" %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout" style="font-weight:bold">({{ curr_user }}) Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login" style="font-weight:bold">Log In</a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="/how-it-works">How It Works</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/about">About Us</a>
                     </li>
-                    {% if curr_user != "" %}
-                        <li class="nav-item position-absolute end-0" style="padding-right:0.5em;">
-                            <a class="nav-link" href="/logout">({{ curr_user }}) Logout</a>
-                            <!--TODO: Change to account name once signed in; link to account settings/logout page-->
-                        </li>
-                    {% else %}
-                        <li class="nav-item position-absolute end-0" style="padding-right:0.5em;">
-                            <a class="nav-link" href="/login">Log In</a>
-                            <!--TODO: Change to account name once signed in; link to account settings/logout page-->
-                        </li>
-                    {% endif %}
                 </ul>
               </div>
             </div>

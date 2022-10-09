@@ -31,7 +31,7 @@
 
 .center {
     text-align:center;
-    background-color: rgb(240, 232, 232);
+    background-color: rgb(159, 157, 157);
 }
 
 .button {
@@ -59,4 +59,22 @@
     left:0;
     right:0;
     padding-bottom:50px;
+}
+
+.topic {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight:600;
+}
+
+.topic:hover {
+    background-color:rgba(171, 235, 255, 0.414)
+}
+
+.selected {
+    background-color:rgba(50, 207, 255, 0.62)
+}
+
+.selected:hover {
+    background-color:rgba(50, 207, 255, 0.62) !important
 }

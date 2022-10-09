@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Connect
+{% endblock %}
+
+{% block main %}
+    <div class="title" style="font-weight:400 !important;">
+        You've been paired with <span style="font-weight:bold;">{{ partner }}</span>!
+    </div>
+    <div class="subtitle">
+        You're both interested in <span style="font-weight:bold;">{{ topic }}</span>.
+    </div>
+    <div class="subtitle" style="font-weight:400 !important;">
+        <br>
+        Contact them here: {{ email }}
+    </div>
+{% endblock %}

@@ -62,17 +62,57 @@ def find_topics():
     if request.method == "GET":
         return render_template('find-topics.html', curr_user=curr_user)
     else:
-        topic = request.form.get("topic")
-        topic = topic.lower()
-        similar_topics = cur.execute("""SELECT name FROM topics WHERE name LIKE ?""", (topic,))
-        similar_topics = cur.fetchall()
-        print(similar_topics)
-        # Better way than just going thru each name and seeing any terms are in there??
-        # TODO: add limit to # of words (spaces)
+        selected_topic = request.form.get("topic-btn")
+        print(selected_topic)
+        if selected_topic != None and selected_topic != "null":
+            selected_topic = selected_topic.lower().replace('-', ' ')
+            cur.execute("""UPDATE topics SET person2=?, full='yes' WHERE name=?""", (curr_user, selected_topic, ))
+            con.commit()
 
+            partner = cur.execute("""SELECT person1 FROM topics WHERE name=?""", (selected_topic, ))
+            partner = cur.fetchall()[0][0]
 
-        print(topic)
-        return render_template('find-topics.html', curr_user=curr_user, similar_topics=similar_topics)
+            cur.execute("""UPDATE accounts SET topic=?, partner=? WHERE name=?""", (selected_topic, partner, curr_user, ))
+            con.commit() 
+
+            cur.execute("""UPDATE accounts SET partner=? WHERE name=?""", (curr_user, partner))
+            con.commit() 
+
+            return redirect(url_for('connect'))
+
+        else:
+            topic = request.form.get("topic")
+            topic = topic.lower()
+
+            # Limit topic to five words
+            if topic.count(' ') > 5:
+                return render_template('find-topics.html', error="Too many words!", curr_user=curr_user)
+            
+            # Search for similar terms in existing topics
+            else:                    
+                l_topic = topic.split()
+                existing_topics = cur.execute("""SELECT name FROM topics""")
+                existing_topics = cur.fetchall()
+
+                matches = []
+                for word in l_topic:
+                    if word not in ['to', 'do', 'and', 'or']:
+                        for topic in existing_topics:
+                            if word in topic[0].split():
+                                matches.append(topic[0].title())
+            return render_template('find-topics.html', curr_user=curr_user, matches=matches)
+
+@app.route("/connect")
+def connect():
+    partner = cur.execute("""SELECT partner FROM accounts WHERE name=?""", (curr_user, ))
+    partner = cur.fetchall()[0][0]
+
+    topic = cur.execute("""SELECT topic FROM accounts WHERE name=?""", (curr_user, ))
+    topic = cur.fetchall()[0][0].title()
+
+    email = cur.execute("""SELECT email FROM accounts WHERE name=?""", (curr_user, ))
+    email = cur.fetchall()[0][0]
+    return render_template('connect.html', curr_user=curr_user, partner=partner, topic=topic, email=email)
 
 # Create Account
 @app.route("/register", methods=["GET", "POST"])
@@ -106,6 +146,6 @@ def register():
                 return render_template('register.html', error="Error: Email already exists!", curr_user=curr_user)
 
         # Insert account information into database
-        cur.execute("""INSERT INTO accounts VALUES (?, ?, ?)""", (username, password, email))
+        cur.execute("""INSERT INTO accounts(name, password, email) VALUES (?, ?, ?)""", (username, password, email))
         con.commit()
         return render_template('index.html', curr_user=curr_user)
