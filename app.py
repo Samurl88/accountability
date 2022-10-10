@@ -110,7 +110,7 @@ def connect():
     topic = cur.execute("""SELECT topic FROM accounts WHERE name=?""", (curr_user, ))
     topic = cur.fetchall()[0][0].title()
 
-    email = cur.execute("""SELECT email FROM accounts WHERE name=?""", (curr_user, ))
+    email = cur.execute("""SELECT email FROM accounts WHERE name=?""", (partner, ))
     email = cur.fetchall()[0][0]
     return render_template('connect.html', curr_user=curr_user, partner=partner, topic=topic, email=email)
 
